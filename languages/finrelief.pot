@@ -346,7 +346,7 @@ msgid "Welcome to %1$s - Version %2$s"
 msgstr ""
 
 #: includes/options-config.php:169
-msgid "<div class=\"about-text\"> FinRelief Theme is a professional, sophisticated, elegant and robustly built WordPress theme for lawyers, Law Firm and Attorney website. The theme is very versatile and can also be easily used by various types of corporations, business and any kind of sites. core feature of WordPress  Has 4 Footer Widget Areas and lot more of customizer options.</div>"
+msgid "<div class=\"about-text\"> FinRelief is an elegant WordPress Theme for Charity and Nonprofit organizations. To Promote the events, to Showcase all kinds of documents and much more. The theme is very versatile and can also be easily used by various types of corporations, business and any kind of sites. core feature of WordPress  Has 4 Footer Widget Areas and lot more of customizer options.</div>"
 msgstr ""
 
 #: includes/options-config.php:171, includes/options-config.php:321
