@@ -26,9 +26,7 @@
 				<?php if( get_theme_mod('copyright') ) : ?>
 							<p><?php echo fin_relief_footer_copyright(get_theme_mod('copyright')); ?></p>
 						<?php else : 
-								printf( __('<p>Powered by <a href="%1$s" target="_blank">WordPress</a>', 'finrelief'), esc_url( 'http://wordpress.org/') );
-								printf( '<span class="sep"> .</span>' );
-								printf( __( 'Theme: FinRelief by <a href="%1$s" target="_blank" rel="designer">Webulous Themes</a></p>', 'finrelief' ), esc_url('http://www.webulousthemes.com/') );
+							echo sprintf( '<p> %1$s <a href="%2$s" target="_blank"> %3$s</a> %4$s <a href="%5$s" target="_blank" rel="designer">%6$s</a></p>', __('Powered by','finrelief'), esc_url( 'http://wordpress.org/'), __('WordPress.','finrelief'), __('Theme: FinRelief by','finrelief'), esc_url('https://www.webulousthemes.com/'), __('Webulous Themes','finrelief')) ;
 					 endif;  ?>
 				</div>
 

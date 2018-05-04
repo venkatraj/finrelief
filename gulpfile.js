@@ -14,10 +14,6 @@ var sort = require('gulp-sort'); // Recommended to prevent unnecessary changes i
 var zip = require('gulp-zip'); 
 var rtlcss = require('gulp-rtlcss'); // RTL Support  
 var stripCssComments = require('gulp-strip-css-comments'); //remove comments in css file
-var plumber = require('gulp-plumber'); //sass error(if sass error occurs start Gulp again to continue working. )
-var gutil = require('gulp-util');  //(add color & beep)add beep sound once the error occurred, plus adding colors to the error message which is useful identifying the error.   
-var browserSync = require('browser-sync').create(); // automatic browser sync 
-var reload = browserSync.reload; 
    
  
 /* zip file */
@@ -61,13 +57,6 @@ gulp.task('scripts',function(){
 //styles task
 gulp.task('styles',function(){  
     gulp.src(['sass/**/*.scss'])
-    .pipe(plumber(function(error) {
-      // Output an error message
-      gutil.log(gutil.colors.red('An error occurred (' + error.plugin + '): ' + error.message));
-     //gutil.beep();
-      // emit the end event, to properly end the task
-      this.emit('end');
-    })) 
    .pipe(sass())  
    .pipe(autoprefixer())
    .pipe(gulp.dest(''));      
@@ -99,13 +88,8 @@ gulp.task('default',['clean'] , function() {
 
 //watch task
 gulp.task('watch',function(){  
-  browserSync.init({  
-    files: ['./**/*.php'],    
-    proxy: 'http://localhost/new/finrelief',
-  }); 
-  //gulp.watch('dist/js/*.js',['scripts',browserSync.reload]);  
-   gulp.watch('sass/**/*.scss',['styles','rtl',browserSync.reload]);      
-   gulp.watch('dist/images/**/*.+(png|jpg|jpeg|gif|svg)',['images',browserSync.reload]);  
+   gulp.watch('sass/**/*.scss',['styles','rtl']);      
+   gulp.watch('dist/images/**/*.+(png|jpg|jpeg|gif|svg)',['images']);  
 });
 
 

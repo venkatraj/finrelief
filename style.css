@@ -1,14 +1,14 @@
 /*
 Theme Name: FinRelief   
-Theme URI: http://www.webulousthemes.com/finrelief/
+Theme URI: https://www.webulousthemes.com/finrelief/
 Author: N. Venkat Raj
-Author URI: http://www.webulousthemes.com/                         
+Author URI: https://www.webulousthemes.com/                         
 Description: FinRelief is an elegant WordPress Theme for Charity and Nonprofit organizations. To Promote the events, to Showcase all kinds of documents and much more. The theme is very versatile and can also be easily used by various types of corporations, business and any kind of sites. core feature of WordPress  Has 4 Footer Widget Areas and lot more of customizer options.
-Version: 1.0.0         
+Version: 1.0.1       
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: finrelief  
-Tags: blog, custom-menu, custom-background, custom-header, custom-logo, featured-images, right-sidebar, sticky-post, threaded-comments, translation-ready, two-columns, one-column, footer-widgets, full-width-template, translation-ready, theme-options
+Tags: blog, custom-menu, custom-background, custom-header, custom-logo, featured-images, right-sidebar, sticky-post, threaded-comments, translation-ready, two-columns, one-column, footer-widgets, full-width-template, theme-options
             
 FinRelief WordPress Theme, Copyright (C) 2017, N. Venkat Raj
 FinRelief is distributed under the terms of the GNU GPL
@@ -941,15 +941,15 @@ a {
   margin-bottom: 2.5em; }
 
 .comment-navigation .nav-previous,
-.paging-navigation .nav-previous,
-.post-navigation .nav-previous {
+.post-navigation .nav-previous,
+.posts-navigation .nav-previous {
   float: left;
   width: 48%;
   margin: 1%; }
 
 .comment-navigation .nav-next,
-.paging-navigation .nav-next,
-.post-navigation .nav-next {
+.post-navigation .nav-next,
+.posts-navigation .nav-next {
   float: right;
   text-align: right;
   width: 47%;
@@ -966,15 +966,9 @@ a {
     color: #222222;
     position: relative;
     font-size: 16px;
-    font-size: 1.6rem;
-    padding-left: 12px; }
-  .post-navigation a {
-    border: none !important;
-    color: #222222 !important; }
+    font-size: 1.6rem; }
   .post-navigation .meta-next-post {
     padding-right: 12px; }
-  .post-navigation .nav-previous:hover a, .post-navigation .nav-next:hover a {
-    background-color: transparent !important; }
 
 .navigation a,
 .comment-navigation a {
@@ -1561,7 +1555,6 @@ ol.comment-list article .comment-author img {
   position: absolute;
   right: 0; }
   .comment-meta .edit-link a {
-    color: #fff;
     padding: 5px 12px; }
     .comment-meta .edit-link a:hover {
       background-color: #f44336;
@@ -1577,10 +1570,6 @@ ol.comment-list article .comment-author img {
     color: #757575; }
     .comment-metadata a:hover {
       color: #f44336; }
-
-.byuser .comment-metadata a:hover,
-.byuser .comment-content a:hover {
-  color: #f44336; }
 
 ol.comment-list li {
   clear: both;
@@ -1830,7 +1819,7 @@ blockquote {
       display: none; }
 
 .home .site-content {
-  padding-top: 0; }
+  padding-top: 50px; }
   .home .site-content .site-main {
     margin-top: 0; }
 

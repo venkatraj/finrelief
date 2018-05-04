@@ -47,6 +47,9 @@ function fin_relief_setup() {
 		'primary' => __( 'Primary Menu', 'finrelief' ),
 	) );
 
+	add_theme_support( 'post-formats', array(
+		'aside', 'image', 'video', 'quote', 'link',
+	) );
 	/*
 	 * Switch default core markup for search form, comment form, and comments
 	 * to output valid HTML5.
@@ -102,24 +105,23 @@ function fin_relief_setup() {
 				// Widget ID
 			    'my_text' => array(
 					// Widget $id -> set when creating a Widget Class
-		        	'text' , 
+		        	'custom_html' , 
 		        	// Widget $instance -> settings 
-					array(
-					  'text'  => '<ul><li><a href="http://www.facebook.com/"><i class="fa fa-facebook"></i></a></li><li><a href="http://www.twitter.com/"><i class="fa fa-twitter"></i></a></li><li><a href="http://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li><li><a href="http://www.tumblr.com/"><i class="fa fa-tumblr"></i></a></li></ul>'
+					array( 
+					  'content'  => '<ul><li><a href="#"><i class="fa fa-facebook"></i></a></li><li><a href="#"><i class="fa fa-twitter"></i></a></li><li><a href="#"><i class="fa fa-pinterest"></i></a></li><li><a href="#"><i class="fa fa-envelope"></i></a></li><li><a href="#"><i class="fa fa-tumblr"></i></a></li></ul>'
 					)
 				),
-				'search',
 			),
 
 			'footer' => array(
 				// Widget ID
 			    'my_text' => array(
 					// Widget $id -> set when creating a Widget Class
-		        	'text' , 
+		        	'custom_html' , 
 		        	// Widget $instance -> settings 
 					array(
 					  'title' => __('About Theme','finrelief'),
-					  'text'  => __('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ','finrelief'),
+					  'content'  => __('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ','finrelief'),
 					)
 				)
 			),
@@ -136,11 +138,11 @@ function fin_relief_setup() {
 				// Widget ID
 			    'my_text' => array(
 					// Widget $id -> set when creating a Widget Class
-		        	'text' , 
+		        	'custom_html' , 
 		        	// Widget $instance -> settings 
 					array(
 					  'title' => __('Head Office','finrelief'),
-					  'text'  => __( 'Honest Bank, 457 Grand Ave,Los Angels, BA 007<br><strong>Email:</strong> <a href="mailto:xxx@mail.com">xxx@mail.com</a><br><strong>phone:</strong> 1234 5624 2586<br><strong>Fax:</strong> 158 425 252','finrelief'),
+					  'content'  => __( 'Honest Bank, 457 Grand Ave,Los Angels, BA 007<br><strong>Email:</strong> <a href="mailto:xxx@mail.com">xxx@mail.com</a><br><strong>phone:</strong> 1234 5624 2586<br><strong>Fax:</strong> 158 425 252','finrelief'),
 					)
 				)
 			),
@@ -300,6 +302,12 @@ require get_template_directory() . '/includes/jetpack.php';
  */
 require get_template_directory() . '/includes/theme-options.php';
 
+/**  
+ * Load TGM plugin 
+ */
+require get_template_directory() . '/admin/class-tgm-plugin-activation.php';
+
+
 /* Woocommerce support */
 
 remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper');
@@ -316,9 +324,141 @@ function fin_relief_output_content_wrapper_end () {
 	echo "</div>";
 }
 
-add_action( 'wp_head', 'fin_relief_remove_wc_breadcrumbs' );
+add_action( 'init', 'fin_relief_remove_wc_breadcrumbs' );
 function fin_relief_remove_wc_breadcrumbs() {
    	remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
-}  
+}
+
+
+/* Demo importer */
+add_filter( 'pt-ocdi/import_files', 'fin_relief_import_demo_data' );
+if ( ! function_exists( 'fin_relief_import_demo_data' ) ) {
+	function fin_relief_import_demo_data() {
+	  return array(
+	    array(   
+	      'import_file_name'             => __('Demo Import','finrelief'),
+	      'categories'                   => array( 'Category 1', 'Category 2' ),
+	      'local_import_file'            => trailingslashit( get_template_directory() ) . 'demo/demo-content.xml',
+	      'local_import_widget_file'     => trailingslashit( get_template_directory() ) . 'demo/widgets.json',
+	      'local_import_customizer_file' => trailingslashit( get_template_directory() ) . 'demo/customizer.dat',
+	    ),
+	  ); 
+	}
+}
+
+add_action( 'pt-ocdi/after_import', 'fin_relief_after_import' );
+if ( ! function_exists( 'fin_relief_after_import' ) ) {
+	function fin_relief_after_import( $selected_import ) { 
+		$importer_name  = __('Demo Import','finrelief');
+	 
+	    if ( $importer_name === $selected_import['import_file_name'] ) {
+	        //Set Menu
+	        $top_menu = get_term_by('name', 'Primary Menu', 'nav_menu'); 
+	        set_theme_mod( 'nav_menu_locations' , array( 
+	              'primary' => $top_menu->term_id,
+	             ) 
+	        );
+
+		    //Set Front page
+		    if( get_option('page_on_front') === '0' && get_option('page_for_posts') === '0' ) {
+			   $page = get_page_by_title( 'Home');
+			   $blog = get_page_by_title( 'Blog');
+			   if ( isset( $page->ID ) ) {
+			   	    update_option( 'show_on_front', 'page' );
+				    update_option( 'page_on_front', $page->ID );
+				    update_option('page_for_posts', $blog->ID);
+			   }
+		    }
+	    }
+	     
+	}
+}
+
+/* Check whether the One Click Import Plugin is installed or not */
+
+function fin_relief_is_plugin_installed($plugin_title)
+{
+    // get all the plugins
+    $installed_plugins = get_plugins();
+
+    foreach ($installed_plugins as $installed_plugin => $data) {
+
+        // check for the plugin title
+        if ($data['Title'] == $plugin_title) {
+
+            // return the plugin folder/file
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/* Recommended plugin using TGM */
+add_action( 'tgmpa_register', 'fin_relief_register_plugins');
+if( !function_exists('fin_relief_register_plugins') ) {
+	function fin_relief_register_plugins() {
+       /**
+		 * Array of plugin arrays. Required keys are name and slug.
+		 * If the source is NOT from the .org repo, then source is also required.
+		 */
+		$plugins = array(
+
+			array(
+				'name'     => 'One Click Demo Import', // The plugin name.
+				'slug'     => 'one-click-demo-import', // The plugin slug (typically the folder name).
+				'required' => false, // If false, the plugin is only 'recommended' instead of required.
+			),
+		);
+		/*
+		 * Array of configuration settings. Amend each line as needed.
+		 *
+		 * TGMPA will start providing localized text strings soon. If you already have translations of our standard
+		 * strings available, please help us make TGMPA even better by giving us access to these translations or by
+		 * sending in a pull-request with .po file(s) with the translations.
+		 *
+		 * Only uncomment the strings in the config array if you want to customize the strings.
+		 */
+		$config = array(
+			'id'           => 'tgmpa',
+			// Unique ID for hashing notices for multiple instances of TGMPA.
+			'default_path' => '',
+			// Default absolute path to bundled plugins.
+			'menu'         => 'tgmpa-install-plugins',
+			// Menu slug.
+			'parent_slug'  => 'themes.php',
+			// Parent menu slug.
+			'capability'   => 'edit_theme_options',
+			// Capability needed to view plugin install page, should be a capability associated with the parent menu used.
+			'has_notices'  => true,
+			// Show admin notices or not.
+			'dismissable'  => true,
+			// If false, a user cannot dismiss the nag message.
+			'dismiss_msg'  => '',
+			// If 'dismissable' is false, this message will be output at top of nag.
+			'is_automatic' => false,
+			// Automatically activate plugins after installation or not.
+			'message'      => '',
+			// Message to output right before the plugins table.
+			'strings'      => array(
+				'notice_can_activate_recommended' => _n_noop(
+					/* translators: 1: plugin name(s). */
+					'Activate the following plugin to import demo content of this theme: %1$s.','finrelief'
+				),
+				'notice_can_install_recommended'  => _n_noop(
+					/* translators: 1: plugin name(s). */
+					'To Make your site look like Theme ScreenShot, Install this Plugin: %1$s. Then Go to Dashboard > Appearance > Import Demo Data.',
+					'finrelief'
+				),
+			),
+		);
+
+		tgmpa( $plugins, $config );
+	}
+}
+
+/* To Hide Branding message in One Click demo import*/
+
+add_filter( 'pt-ocdi/disable_pt_branding', '__return_true' );
 
 

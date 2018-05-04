@@ -13,11 +13,11 @@ function fin_relief_custom_header_setup() {
 		'default-image'          => '',
 		'default-text-color'     => '222222', 
 		'header_text'            => true,
-		'width'                  => 1920,  
+		'width'                  => 1920,
 		'height'                 => 400,
-		'video'                  => true, 
 		'flex-height'            => true, 
-		'wp-head-callback'       => 'fin_relief_header_style'
+		'wp-head-callback'       => 'fin_relief_header_style',
+		'video'                  => true
 	) ) );
 }
 
@@ -35,13 +35,10 @@ function fin_relief_header_style() {
 	if ( get_header_image() ) {
 	?>
 	<style type="text/css">    
-		.header-image {
-			background-image: url(<?php echo esc_url(get_header_image()); ?>);
-			display: block;
-		}   
-		.custom-header-media img {
-				display: none;
-		}   
+        .custom-header-media img {
+		    display: block;
+		}  
+      
 	</style>
 	<?php
 	}
@@ -65,6 +62,7 @@ function fin_relief_header_style() {
 				      height: 100vh;
 				      width: 100vw;
 				      overflow: hidden;
+				      object-fit: cover;
 				}
 
 		    </style><?php

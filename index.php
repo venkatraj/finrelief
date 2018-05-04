@@ -17,7 +17,7 @@ get_header(); ?>
 		
 	<?php $sidebar_position = get_theme_mod( 'sidebar_position', 'right' ); ?>
 		<?php if( 'left' == $sidebar_position ) :?>
-			<?php get_sidebar('left'); ?>
+			<?php get_sidebar(); ?>
 		<?php endif; ?>  
 
 	<div id="primary" class="content-area <?php fin_relief_layout_class(); ?>  columns">
@@ -42,7 +42,10 @@ get_header(); ?>
 			    if(  get_theme_mod ('numeric_pagination',true) ) : 
 					the_posts_pagination();
 				else :
-					fin_relief_post_nav();     
+					the_posts_navigation( array(
+					    'prev_text' => __(' &larr; Previous Post','finrelief'),
+					    'next_text' => __('Next Post &rarr;','finrelief'),
+					) );    
 				endif; 
 			?>
 

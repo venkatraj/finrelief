@@ -219,8 +219,8 @@
 }
 
 .comment-navigation .nav-previous,
-.paging-navigation .nav-previous,
-.post-navigation .nav-previous {
+.post-navigation .nav-previous,
+.posts-navigation .nav-previous {
 	float: left;
 	width: 48%;
 	margin: 1%;
@@ -229,8 +229,8 @@
 
 
 .comment-navigation .nav-next,
-.paging-navigation .nav-next,
-.post-navigation .nav-next {
+.post-navigation .nav-next,
+.posts-navigation .nav-next {
 	float: right;
 	text-align: right;
 	width: 47%;
@@ -249,20 +249,11 @@
 		color: $secondary;
 		position: relative;
 		@include font-size(1.6);
-		padding-left: 12px;	
 		
 	}
-	a {
-		border: none!important;
-		color: $secondary!important;
-	}
+
 	.meta-next-post {
 		padding-right: 12px;	
-	}
-	.nav-previous,.nav-next {
-	  &:hover a {
-	  	background-color: transparent!important;
-	  }
 	}
 }
 
@@ -346,10 +337,6 @@
 		top: 30%;
 		font-weight: 700;
 	}
-	.nav-previous:active,.nav-next:active {
-		
-	}
-
 	.nav-previous {
 		a {
 			padding-left:15px;

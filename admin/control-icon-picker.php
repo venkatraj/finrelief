@@ -24,9 +24,9 @@
  * @since 0.1
  */
 
-if( !function_exists('icon_add_icon_picker_control') ) :
-	function icon_add_icon_picker_control( $wp_customize ) {
-		class Icon_Customizer_Icon_Picker_Control extends WP_Customize_Control {
+if( !function_exists('fin_relief_icon_add_icon_picker_control') ) :
+	function fin_relief_icon_add_icon_picker_control( $wp_customize ) {
+		class Fin_Relief_Icon_Customizer_Icon_Picker_Control extends WP_Customize_Control {
 
 			public $type = 'icon-picker'; 
 	 
@@ -58,4 +58,4 @@ if( !function_exists('icon_add_icon_picker_control') ) :
 		}
 	}
 endif;
-add_action( 'customize_register', 'icon_add_icon_picker_control' );
+add_action( 'customize_register', 'fin_relief_icon_add_icon_picker_control' );

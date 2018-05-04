@@ -43,6 +43,7 @@ function fin_relief_theme_font_url($font) {
 }
 
 function fin_relief_admin_enqueue_scripts( $hook ) {  
+	//if( strpos($hook, 'fin_relief_upgrade') ) {
 		wp_enqueue_style( 
 			'font-awesome', 
 			get_template_directory_uri() . '/css/font-awesome.min.css', 
@@ -57,5 +58,14 @@ function fin_relief_admin_enqueue_scripts( $hook ) {
 			'1.0.0', 
 			'all' 
 		);
+	//}   
+	wp_enqueue_script( 
+		'finrelief-customizer-script', 
+		get_template_directory_uri() . '/js/admin-custom.js',
+		array('jquery'),
+		'1.0.0',
+		true
+	);
+
 }
 add_action( 'admin_enqueue_scripts', 'fin_relief_admin_enqueue_scripts' );

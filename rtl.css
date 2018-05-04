@@ -875,15 +875,15 @@ a {
   margin-bottom: 2.5em; }
 
 .comment-navigation .nav-previous,
-.paging-navigation .nav-previous,
-.post-navigation .nav-previous {
+.post-navigation .nav-previous,
+.posts-navigation .nav-previous {
   float: right;
   width: 48%;
   margin: 1%; }
 
 .comment-navigation .nav-next,
-.paging-navigation .nav-next,
-.post-navigation .nav-next {
+.post-navigation .nav-next,
+.posts-navigation .nav-next {
   float: left;
   text-align: left;
   width: 47%;
@@ -900,15 +900,9 @@ a {
     color: #222222;
     position: relative;
     font-size: 16px;
-    font-size: 1.6rem;
-    padding-right: 12px; }
-  .post-navigation a {
-    border: none !important;
-    color: #222222 !important; }
+    font-size: 1.6rem; }
   .post-navigation .meta-next-post {
     padding-left: 12px; }
-  .post-navigation .nav-previous:hover a, .post-navigation .nav-next:hover a {
-    background-color: transparent !important; }
 
 .navigation a,
 .comment-navigation a {
@@ -1483,7 +1477,6 @@ ol.comment-list article .comment-author img {
   position: absolute;
   left: 0; }
   .comment-meta .edit-link a {
-    color: #fff;
     padding: 5px 12px; }
     .comment-meta .edit-link a:hover {
       background-color: #f44336;
@@ -1499,10 +1492,6 @@ ol.comment-list article .comment-author img {
     color: #757575; }
     .comment-metadata a:hover {
       color: #f44336; }
-
-.byuser .comment-metadata a:hover,
-.byuser .comment-content a:hover {
-  color: #f44336; }
 
 ol.comment-list li {
   clear: both;
@@ -1752,7 +1741,7 @@ blockquote {
       display: none; }
 
 .home .site-content {
-  padding-top: 0; }
+  padding-top: 50px; }
   .home .site-content .site-main {
     margin-top: 0; }
 

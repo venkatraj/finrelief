@@ -5,15 +5,14 @@
  * @package FinRelief
  */
 
-get_header(); 
-get_template_part( 'template-parts/breadcrumb' ); ?>
+get_header();  ?>
 			
 <div id="content" class="site-content">
 		<div class="container">
 
         <?php $sidebar_position = get_theme_mod( 'sidebar_position', 'right' ); ?>
 		<?php if( 'left' == $sidebar_position ) :?>
-			<?php get_sidebar('left'); ?>
+			<?php get_sidebar(); ?>
 		<?php endif; ?>  
 		
 	<section id="primary" class="content-area <?php fin_relief_layout_class(); ?>  columns">
@@ -44,7 +43,10 @@ get_template_part( 'template-parts/breadcrumb' ); ?>
 					if(  get_theme_mod ('numeric_pagination',true) ) : 
 							the_posts_pagination();
 						else :
-							fin_relief_post_nav();     
+							the_posts_navigation( array(
+							    'prev_text' => __(' &larr; Previous Post','finrelief'),
+							    'next_text' => __('Next Post &rarr;','finrelief'),
+							 ) );      
 						endif; 
 				?>
 

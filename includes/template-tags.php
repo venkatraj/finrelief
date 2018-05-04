@@ -113,7 +113,7 @@ if( ! function_exists('fin_relief_top_meta') ) {
 		if ( 'post' == get_post_type() ) {  ?>
 			<div class="entry-meta">
 				<span class="date-structure">				
-					<span class="dd"><a class="url fn n" href="<?php echo get_day_link(get_the_time('Y'), get_the_time('m'),get_the_time('d')); ?>"><i class="fa fa-calendar"></i><?php the_time(get_option('date_format')); ?></a></span>			
+					<span class="dd"><a class="url fn n" href="<?php echo esc_url( get_day_link(get_the_time('Y'), get_the_time('m'),get_the_time('d'))); ?>"><i class="fa fa-calendar"></i><?php the_time(get_option('date_format')); ?></a></span>			
 				</span>  
 				<?php fin_relief_author(); ?>
 				<?php fin_relief_comments_meta(); ?> 
@@ -134,7 +134,8 @@ if( ! function_exists('fin_relief_top_meta') ) {
 if( ! function_exists('fin_relief_recent_posts') ) {  
 	function fin_relief_recent_posts() {       
 		$output = '';
-		$posts_per_page  = get_theme_mod('recent_posts_count', 6 );
+		$posts_per_page  = get_theme_mod('recent_posts_count', 6 ); 
+		$post_ID  = explode (',',get_theme_mod('recent_posts_exclude'));
 		// WP_Query arguments
 		$args = array (
 			'post_type'              => 'post',
@@ -142,6 +143,7 @@ if( ! function_exists('fin_relief_recent_posts') ) {
 			'posts_per_page'         => intval($posts_per_page),
 			'ignore_sticky_posts'    => true,
 			'order'                  => 'DESC',
+			'post__not_in'           => $post_ID,
 		);
 
 		// The Query
@@ -283,16 +285,6 @@ if( ! function_exists('fin_relief_recent_posts') ) {
 			} elseif ( !is_single() && !is_page() && get_post_type() != 'post' && !is_404() ) {
 				$post_type = get_post_type_object(get_post_type());
 				echo $before . $post_type->labels->singular_name . $after;
-
-			} elseif ( is_attachment() ) {
-				$parent = get_post($post->post_parent);
-				$cat = get_the_category($parent->ID); $cat = $cat[0];
-				$cats = get_category_parents($cat, TRUE, $delimiter);
-				$cats = str_replace('<a', $linkBefore . '<a' . $linkAttr, $cats);
-				$cats = str_replace('</a>', '</a>' . $linkAfter, $cats);
-				echo $cats;
-				printf($link, get_permalink($parent), $parent->post_title);
-				if ($showCurrent == 1) echo $delimiter . $before . get_the_title() . $after;
 
 			} elseif ( is_page() && !$post->post_parent ) {
 				if ($showCurrent == 1) echo $before . get_the_title() . $after;

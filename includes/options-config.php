@@ -159,20 +159,21 @@ function fin_relief_display_upgrade() {
         $tab = null;
     } 
      
-    $pro_theme_url = 'https://webulousthemes.com/theme/finrelief-pro/';
+    $pro_theme_url = 'https://www.webulousthemes.com/theme/finrelief-pro/';
     $doc_url  = 'https://www.webulousthemes.com/finrelief-free';
-    $support_url = 'https://webulousthemes.com/free-support-request/';   
+    $support_url = 'https://www.webulousthemes.com/free-support-request/';   
     
     $current_action_link =  admin_url( 'themes.php?page=fin_relief_upgrade&tab=pro_features' ); ?>
     <div class="finrelief-wrapper about-wrap">
         <h1><?php printf( esc_html__('Welcome to %1$s - Version %2$s', 'finrelief'), $theme_data->Name ,$theme_data->Version ); ?></h1><?php
        	printf( __('<div class="about-text"> FinRelief is an elegant WordPress Theme for Charity and Nonprofit organizations. To Promote the events, to Showcase all kinds of documents and much more. The theme is very versatile and can also be easily used by various types of corporations, business and any kind of sites. core feature of WordPress  Has 4 Footer Widget Areas and lot more of customizer options.</div>', 'finrelief') ); ?>
-        <a href="https://webulousthemes.com/" target="_blank" class="wp-badge welcome-logo"></a>   
+        <a href="https://www.webulousthemes.com/" target="_blank" class="wp-badge welcome-logo"></a>   
         <p class="upgrade-btn"><a class="upgrade" href="<?php echo esc_url($pro_theme_url); ?>" target="_blank"><?php printf( __( 'Buy %1s Pro - $39', 'finrelief'), $theme_data->Name ); ?></a></p>
 
 	   <h2 class="nav-tab-wrapper">
 	        <a href="?page=fin_relief_upgrade" class="nav-tab<?php echo is_null($tab) ? ' nav-tab-active' : null; ?>"><?php echo $theme_data->Name; ?></a>
-	        <a href="?page=fin_relief_upgrade&tab=pro_features" class="nav-tab<?php echo $tab == 'pro_features' ? ' nav-tab-active' : null; ?>"><?php esc_html_e( 'PRO Features', 'finrelief' );  ?></a>
+	        <a href="?page=fin_relief_upgrade&tab=one_click_demo" class="nav-tab<?php echo $tab == 'one_click_demo' ? ' nav-tab-active' : null; ?>"><?php esc_html_e( 'Import Demo Data', 'finrelief' );  ?></a>
+			<a href="?page=fin_relief_upgrade&tab=pro_features" class="nav-tab<?php echo $tab == 'pro_features' ? ' nav-tab-active' : null; ?>"><?php esc_html_e( 'PRO Features', 'finrelief' );  ?></a>
             <a href="?page=fin_relief_upgrade&tab=free_vs_pro" class="nav-tab<?php echo $tab == 'free_vs_pro' ? ' nav-tab-active' : null; ?>"><?php esc_html_e( 'Free VS PRO', 'finrelief' ); ?></a>
 	        <?php do_action( 'fin_relief_admin_more_tabs' ); ?>
 	    </h2>      
@@ -207,11 +208,29 @@ function fin_relief_display_upgrade() {
                     </div>  
 
                     <div class="theme_info_right">
-                        <img src="<?php echo get_template_directory_uri(); ?>/screenshot.png" alt="Theme Screenshot" />
+                        <?php echo sprintf ( '<img src="'. get_template_directory_uri() .'/screenshot.png" alt="%1$s" />',__('Theme screenshot','finrelief') ); ?>
                     </div>
                 </div>
             </div>
         <?php } ?>
+
+         <?php if ( $tab == 'one_click_demo' ) { ?>
+            <div class="one-click-demo-tab info-tab-content">
+				<div class="wrap clearfix">
+					<?php
+					if( ! function_exists('is_plugin_activate') ) {
+						include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+					}
+					if ( fin_relief_is_plugin_installed('One Click Demo Import') != 1 ) {
+						echo sprintf('%1$s <a href="%2$s"> %3$s</a>', __('Install required plugin to import the demo content.','finrelief'), admin_url('themes.php?page=tgmpa-install-plugins&plugin_status=install'), __('Begin Installing Plugin','finrelief') );
+					} elseif ( is_plugin_active( 'one-click-demo-import/one-click-demo-import.php' ) ) {	
+						echo sprintf('<a href="%1$s"> %2$s</a>',  admin_url('themes.php?page=pt-one-click-demo-import'), __('Click here to install the demo','finrelief') );
+				    } else {
+				    	echo sprintf('%1$s <a href="%2$s"> %3$s</a>', __('Kindly activate the Required plugin to Import the demo content.','finrelief'), admin_url('themes.php?page=tgmpa-install-plugins&plugin_status=activate'), __('Begin Activating Plugin','finrelief') );
+				    } ?>
+				</div>
+			</div><?php   
+		} ?> 
 
         <?php if ( $tab == 'pro_features' ) { ?>
             <div class="pro-features-tab info-tab-content"><?php
@@ -230,8 +249,8 @@ function fin_relief_display_upgrade() {
 		                <thead>
 			                <tr>
 			                    <th></th>
-			                    <th><?php echo $theme_data->Name; ?> Lite</th>
-			                    <th><?php echo $theme_data->Name; ?> PRO</th>
+			                    <th><?php echo esc_html($theme_data->Name); ?> Lite</th>
+			                    <th><?php echo esc_html($theme_data->Name); ?> PRO</th>
 			                </tr>
 		                </thead>
 		                <tbody>
@@ -257,7 +276,7 @@ function fin_relief_display_upgrade() {
 		                    </tr>
 		                    <tr>
 		                         <td><h3><?php _e('Social Links', 'finrelief'); ?></h3></td>
-		                         <td class="only-lite"><span class="dashicons-before dashicons-yes"></span></td>
+		                         <td class="only-pro"><span class="dashicons-before dashicons-no-alt"></span></td>
 		                         <td class="only-lite"><span class="dashicons-before dashicons-yes"></span></td>
 		                    </tr>
 		                    <tr>
@@ -484,7 +503,6 @@ function fin_relief_display_upgrade() {
 							'enable_recent_post_service' => array(
                                 'type' => 'checkbox',
                                 'label' => __('Enable Home Page Recent Post Section', 'finrelief'),
-                                'description' => __('Enable recent post section in home page', 'finrelief'),
                                 'default' => 1,
                                 'sanitize_callback' => 'fin_relief_boolean',  
                             ), 
@@ -494,10 +512,15 @@ function fin_relief_display_upgrade() {
 								'sanitize_callback' => 'absint',
 								'default' => 2,  
 							), 
+							'recent_posts_exclude' => array(
+								'type' => 'text',
+								'label' => __('Exclude the Posts from Home Page.', 'finrelief'),
+								'description' => __('Post IDs, separated by commas.','finrelief'),
+								'sanitize_callback' => 'sanitize_text_field', 
+							),
 							'enable_home_default_content' => array(
                                 'type' => 'checkbox',
                                 'label' => __('Enable Home Page Default Content', 'finrelief'),
-                                'description' => __('Enable home page default content', 'finrelief'),
                                 'default' => 0,  
                                 'sanitize_callback' => 'fin_relief_boolean',
                             ),
@@ -542,14 +565,12 @@ function fin_relief_display_upgrade() {
                              'author_bio_box' => array(
                                 'type' => 'checkbox',
                                 'label' => __(' Enable Author Bio Box below single post', 'finrelief'),
-                                'description' => __('Show Author information box below single post.', 'finrelief'),
                                 'default' => 0,
                                 'sanitize_callback' => 'fin_relief_boolean',    
                             ),
                             'related_posts' => array(
                                 'type' => 'checkbox',
                                 'label' => __('Show Related posts', 'finrelief'),
-                                'description' => __('Show related posts.', 'finrelief'),
                                 'default' => 0, 
                                 'sanitize_callback' => 'fin_relief_boolean', 
                             ),
@@ -562,13 +583,6 @@ function fin_relief_display_upgrade() {
                                 ),
                                'default' => '1', 
                                'sanitize_callback' => 'absint',    
-                            ),
-                            'comments' => array(
-                                'type' => 'checkbox',
-                                'label' => __(' Show Comments', 'finrelief'),
-                                'description' => __('Show Comments', 'finrelief'),
-                                'default' => 1,  
-                                'sanitize_callback' => 'fin_relief_boolean',
                             ),
 						),
 					),

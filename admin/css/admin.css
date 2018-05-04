@@ -12,7 +12,7 @@
 #free_pro .free-pro-table td {
   border-top: 1px solid #ccc;
   padding: 20px 0 25px;
-}
+} 
 
 #free_pro .free-pro-table h3{
   margin: 0;
@@ -201,9 +201,13 @@ a[href="themes.php?page=fin_relief_upgrade"] {
   color: white;
 }
 
-  .upgrade-btn .upgrade:hover {
-    background-color: #000; }
+.upgrade-btn .upgrade:hover {
+  background-color: #000; 
+}
 
+.upgrade-btn .upgrade:focus {
+  box-shadow: none;
+}
 
 /* wrap box */
 .wrap .one-third.column {
@@ -226,4 +230,9 @@ a[href="themes.php?page=fin_relief_upgrade"] {
     font-size: 50px;
     color: #03a9f4; }
 
+/* One click demo plugin code */
+
+.ocdi__intro-notice.notice.notice-warning.is-dismissible {
+  display: none !important;
+}  
 /*# sourceMappingURL=admin.css.map */

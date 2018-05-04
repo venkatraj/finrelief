@@ -47,7 +47,10 @@ get_template_part( 'template-parts/breadcrumb' ); ?>
 				if(  get_theme_mod ('numeric_pagination',true) ) : 
 						the_posts_pagination();
 					else :
-						fin_relief_post_nav();     
+						the_posts_navigation( array(
+						    'prev_text' => __(' &larr; Previous Post','finrelief'),
+						    'next_text' => __('Next Post &rarr;','finrelief'),
+						 ) );      
 					endif; 
 			?>
 

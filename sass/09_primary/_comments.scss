@@ -104,23 +104,12 @@ ol.comment-list article .comment-author img {
 	height: 80px;
 }
 
-ol.comment-list article {}
-
-ol.comment-list li.byuser {
-	article {
-		//background-color: rgba($secondary, 0.1);
-	}	
-}
-
 
 .comment-meta .edit-link {
 	position: absolute;
 	right:0;
 	a {
-		color: $white;
 		padding: 5px 12px;
-		//background-color: $c1;
-		//border-radius: 3px;
 		&:hover {
 			background-color: $primary;
 			color: $white;
@@ -141,10 +130,7 @@ ol.comment-list li.byuser {
 	}
 }
   
-.byuser .comment-metadata a:hover,
-.byuser .comment-content a:hover {
-	color: $primary;
-}    
+
 
 
 ol.comment-list  {
