@@ -4,7 +4,7 @@ Theme URI: https://www.webulousthemes.com/finrelief/
 Author: N. Venkat Raj
 Author URI: https://www.webulousthemes.com/                         
 Description: FinRelief is an elegant WordPress Theme for Charity and Nonprofit organizations. To Promote the events, to Showcase all kinds of documents and much more. The theme is very versatile and can also be easily used by various types of corporations, business and any kind of sites. core feature of WordPress  Has 4 Footer Widget Areas and lot more of customizer options.
-Version: 1.0.2      
+Version: 1.0.3    
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: finrelief  
@@ -3057,6 +3057,23 @@ blockquote {
       list-style: none; }
     .site-footer .footer-widgets .widget_rss ul li {
       background: none; }
+  .site-footer .scroll-to-top {
+    background: #f44336;
+    color: #fff;
+    bottom: 3%;
+    cursor: pointer;
+    position: fixed;
+    right: 20px;
+    z-index: 999;
+    text-align: center;
+    line-height: 40px;
+    width: 40px;
+    background-clip: padding-box;
+    /* stops bg color from leaking outside the border: */
+    border-radius: 4px;
+    transition: background-color 0.3s linear; }
+  .site-footer .scroll-to-top:hover {
+    background: rgba(244, 67, 54, 0.8); }
 
 .site-info {
   background: rgba(0, 0, 0, 0.5);

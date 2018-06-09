@@ -445,6 +445,12 @@ function fin_relief_display_upgrade() {
 								'default' => 1,
 								'sanitize_callback' => 'fin_relief_boolean',
 							),
+							'scroll_to_top' => array(
+								'type' => 'checkbox',
+								'label' => __('Enable Scroll To Top', 'finrelief'),
+								'default' => 0,
+								'sanitize_callback' => 'fin_relief_boolean',
+							),
 							'copyright' => array(
                                 'type' => 'textarea',
                                 'label' => __('Footer Copyright Text (Validated that it\'s HTML Allowed)', 'finrelief'),
@@ -667,19 +673,19 @@ if ( ! function_exists( 'fin_relief_footer_copyright' ) ) {
 
     function fin_relief_footer_copyright($string) {
         $allowed_tags = array(    
-                            'a' => array(
-                            	'href' => array(),
-								'title' => array(),
-								'target' => array(),
-                            ),
-							'img' => array(
-								'src' => array(),  
-								'alt' => array(),
-							),
-							'p' => array(),
-							'br' => array(),
-							'em' => array(),
-                            'strong' => array(),
+			'a' => array(
+				'href' => array(),
+				'title' => array(),
+				'target' => array(),
+			),
+			'img' => array(
+				'src' => array(),  
+				'alt' => array(),
+			),
+			'p' => array(),
+			'br' => array(),
+			'em' => array(),
+			'strong' => array(),
         );
         return wp_kses( $string,$allowed_tags);
 
