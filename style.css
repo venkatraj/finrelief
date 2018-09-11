@@ -4,7 +4,7 @@ Theme URI: https://www.webulousthemes.com/finrelief/
 Author: N. Venkat Raj
 Author URI: https://www.webulousthemes.com/                         
 Description: FinRelief is an elegant WordPress Theme for Charity and Nonprofit organizations. To Promote the events, to Showcase all kinds of documents and much more. The theme is very versatile and can also be easily used by various types of corporations, business and any kind of sites. core feature of WordPress  Has 4 Footer Widget Areas and lot more of customizer options.
-Version: 1.0.4   
+Version: 1.0.5
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: finrelief  
@@ -1225,12 +1225,12 @@ object {
 .alignleft {
   display: inline;
   float: left;
-  margin-right: 1.5em; }
+  margin-right: 1.5em !important; }
 
 .alignright {
   display: inline;
   float: right;
-  margin-left: 1.5em; }
+  margin-left: 1.5em !important; }
 
 .aligncenter {
   display: block;
@@ -1777,13 +1777,18 @@ blockquote {
     blockquote p cite {
       font-style: normal;
       text-transform: uppercase;
-      color: #fff; }
+      color: #222222; }
     blockquote p a, blockquote p a:visited {
       color: #fff;
       font-size: 14px;
       font-size: 1.4rem; }
     blockquote p a:hover {
       color: #757575; }
+
+p cite {
+  font-style: normal;
+  text-transform: uppercase;
+  color: #222222; }
 
 .related-posts {
   padding: 20px 0px; }
@@ -1816,6 +1821,74 @@ blockquote {
       color: #222222; }
     .post .latest-content a.more-link .fa {
       display: none; }
+
+/* Gutenberg CSS style */
+.wp-block-latest-posts.aligncenter {
+  margin-left: 3em; }
+
+.wp-block-verse {
+  color: #757575; }
+
+.wp-block-quote {
+  padding: 0px;
+  border-left: 4px solid black;
+  padding-left: 5px;
+  margin-top: 0px; }
+  .wp-block-quote:before {
+    content: "";
+    border: 0px; }
+  .wp-block-quote p {
+    padding: 20px !important; }
+  .wp-block-quote cite {
+    margin: 0px;
+    padding-left: 20px; }
+
+.wp-block-quote.is-large {
+  border: 0px;
+  color: #222222;
+  padding: 20px; }
+  .wp-block-quote.is-large cite {
+    text-align: right;
+    display: block;
+    color: #222222;
+    font-style: italic;
+    padding-right: 20px; }
+
+.wp-block-pullquote {
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+  padding: 0px;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  border-left: none !important;
+  margin-bottom: 20px; }
+  .wp-block-pullquote p {
+    padding: 20px !important; }
+  .wp-block-pullquote:before {
+    content: "";
+    border: 0px; }
+
+.wp-block-pullquote.alignleft {
+  margin-right: 25px; }
+
+.wp-block-pullquote.alignright {
+  margin-left: 25px; }
+
+.wp-block-button a:hover {
+  padding: 11px 24px;
+  box-shadow: 3px 3px black;
+  -webkit-box-shadow: 3px 3px black; }
+
+.wp-block-cover-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
+.wp-block-audio {
+  text-align: center; }
+
+.wp-block-button.aligncenter {
+  margin-bottom: 1.5em; }
 
 .home .site-content {
   padding-top: 50px; }
